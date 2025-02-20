@@ -46,7 +46,7 @@ abstract contract BaseHook is IHooks, ImmutableState {
     /// @inheritdoc IHooks
     function afterInitialize(address sender, PoolKey calldata key, uint160 sqrtPriceX96, int24 tick)
         external
-        onlyPoolManager
+        onlyPoolManager virtual
         returns (bytes4)
     {
         return _afterInitialize(sender, key, sqrtPriceX96, tick);
@@ -164,7 +164,7 @@ abstract contract BaseHook is IHooks, ImmutableState {
         IPoolManager.SwapParams calldata params,
         BalanceDelta delta,
         bytes calldata hookData
-    ) external onlyPoolManager returns (bytes4, int128) {
+    ) external onlyPoolManager virtual returns (bytes4, int128) {
         return _afterSwap(sender, key, params, delta, hookData);
     }
 
